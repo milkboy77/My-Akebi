@@ -16,6 +16,7 @@
 
 <h1 align="center">Getting Started</h1>
 
+Akebi  古老的个人汉化版本~
 ## Stable Release
 1. Head over to the [releases page](https://github.com/Akebi-Group/Akebi-GC/releases)
 2. Download the latest binaries
