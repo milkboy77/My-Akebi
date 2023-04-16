@@ -118,7 +118,6 @@ namespace cheat::game::filters
 		extern SimpleFilter Kitsune;
 		extern SimpleFilter BakeDanuki;
 		extern SimpleFilter Meat;
-		extern SimpleFilter Scarab;
 	}
 
 	namespace mineral
@@ -230,11 +229,6 @@ namespace cheat::game::filters
 		extern SimpleFilter ShaggySumpterBeast;
 		extern SimpleFilter Spincrocodile;
 		extern SimpleFilter SentryTurrets;
-		extern SimpleFilter AeonblightDrake;
-		extern SimpleFilter PrimalConstruct;
-		extern SimpleFilter SemiPerpetualControlMatrix;
-		extern SimpleFilter Scorpion;
-		extern SimpleFilter Vulture;
 	}
 
 	namespace plant
@@ -290,8 +284,6 @@ namespace cheat::game::filters
 		extern SimpleFilter SumeruRose;
 		extern SimpleFilter Viparyas;
 		extern SimpleFilter ZaytunPeach;
-		extern SimpleFilter Redcrest;
-		extern SimpleFilter Ajilenakh;
 	}
 
 	namespace puzzle
@@ -339,8 +331,8 @@ namespace cheat::game::filters
 		extern SimpleFilter SaghiraMachine;
 		extern SimpleFilter StonePillarSeal;
 		extern SimpleFilter TriYanaSeeds;
-		extern SimpleFilter SumeruPuzzles;
-		extern SimpleFilter TheWithering;
+		extern SimpleFilter DendroPuzzles;
+		extern SimpleFilter DreadfulWithering;
 		extern SimpleFilter PhantasmalGate;
 	}
 
@@ -350,7 +342,6 @@ namespace cheat::game::filters
 		extern SimpleFilter Chests;
 		extern SimpleFilter Ores;
 		extern SimpleFilter PlantDestroy;
-		extern SimpleFilter BreakableObjects;
 		extern WhitelistFilter Doodads;
 		extern SimpleFilter Animals;
 		extern SimpleFilter AnimalDrop;

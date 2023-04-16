@@ -7,8 +7,6 @@
 #include <cheat-base/render/gui-util.h>
 #include <cheat-base/cheat/misc/Settings.h>
 
-#include <imgui_internal.h>
-
 namespace cheat
 {
 
@@ -47,7 +45,7 @@ namespace cheat
 
 		ImGui::SetNextWindowSize(ImVec2(600, 300), ImGuiCond_FirstUseEver);
 
-		if (!ImGui::Begin("Akebi-GC"))
+		if (!ImGui::Begin(u8"Akebi-GC 3.0.51 OS 东方Project专属  汉化by Gktwo/东方乄"))
 		{
 			ImGui::End();
 			return;
@@ -55,7 +53,7 @@ namespace cheat
 
 		ImGui::BeginGroup();
 
-		if (ImGui::Checkbox("Block key/mouse", &m_IsBlockingInput))
+		if (ImGui::Checkbox(u8"锁定鼠标/键盘", &m_IsBlockingInput))
 		{
 			renderer::SetInputLock(this, m_IsBlockingInput);
 		}
@@ -289,7 +287,7 @@ namespace cheat
 
 		if (ImGui::BeginTable("activesTable", 1, tabFlags))
 		{
-			ImGui::TableSetupColumn("Active features");
+			ImGui::TableSetupColumn(u8"已激活功能");
 			ImGui::TableHeadersRow();
 
 			int row = 0;
@@ -303,9 +301,9 @@ namespace cheat
 
 					feature->DrawStatus();
 
-					//ImU32 row_bg_color = ImGui::GetColorU32(
-					//	ImVec4(0.2f + row * 0.1f, 0.1f + row * 0.05f, 0.1f + row * 0.03f, 0.85f));
-					//ImGui::TableSetBgColor(ImGuiTableBgTarget_RowBg0, row_bg_color);
+					ImU32 row_bg_color = ImGui::GetColorU32(
+						ImVec4(0.2f + row * 0.1f, 0.1f + row * 0.05f, 0.1f + row * 0.03f, 0.85f));
+					ImGui::TableSetBgColor(ImGuiTableBgTarget_RowBg0, row_bg_color);
 					row++;
 				}
 			}
@@ -332,9 +330,9 @@ namespace cheat
 		if (!showAny && !settings.f_StatusMove)
 			return;
 
-		//ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.04f, 0.05f, 0.05f, 0.90f));
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.04f, 0.05f, 0.05f, 0.90f));
 		ImGui::Begin("Info window", nullptr, flags);
-		//ImGui::PopStyleColor();
+		ImGui::PopStyleColor();
 
 		if (!showAny)
 		{
@@ -347,14 +345,14 @@ namespace cheat
 		{
 			auto& sections = m_FeatureMap[moduleName];
 			bool moduleShowAny = std::any_of(sections.begin(), sections.end(),
-				[](const auto& iter)
-				{
-					return std::any_of(iter.second.begin(), iter.second.end(),
-						[](const auto feat)
-						{
-							return feat->NeedInfoDraw();
-						});
-				}
+			                                 [](const auto& iter)
+			                                 {
+				                                 return std::any_of(iter.second.begin(), iter.second.end(),
+				                                                    [](const auto feat)
+				                                                    {
+					                                                    return feat->NeedInfoDraw();
+				                                                    });
+			                                 }
 			);
 			if (!moduleShowAny)
 				continue;

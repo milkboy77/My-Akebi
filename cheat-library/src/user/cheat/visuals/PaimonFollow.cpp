@@ -12,20 +12,21 @@ namespace cheat::feature
     }
 
     PaimonFollow::PaimonFollow() : Feature(),
-        NFEX(f_Enabled, "Paimon Follow", "PaimonFollow", "Visuals", false, false)
+        NFEX(f_Enabled, "Paimon Follow", "PaimonFollow", "Visuals", false, false),
+        toBeUpdate(), nextUpdate(0)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(PaimonFollow::OnGameUpdate);
     }
 
     const FeatureGUIInfo& PaimonFollow::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "PaimonFollow", "Visuals", true };
+        static const FeatureGUIInfo info{ u8"≈…√Œ∏˙ÀÊ", "Visuals", true };
         return info;
     }
 
     void PaimonFollow::DrawMain()
     {
-        ConfigWidget(f_Enabled, "To display paimon, turn on the function, open the profile (esc) and close it. \n" \
+        ConfigWidget(u8"≈…√Œ∏˙ÀÊ", f_Enabled, "To display paimon, turn on the function, open the profile (esc) and close it. \n" \
             "If the paimon disappeared after teleportation, do not disable the function, open and close the profile.");
     }
 
@@ -36,7 +37,7 @@ namespace cheat::feature
 
     void PaimonFollow::DrawStatus()
     {
-        ImGui::Text("Paimon Follow");
+        ImGui::Text(u8"≈…√Œ∏˙ÀÊ");
     }
 
     PaimonFollow& PaimonFollow::GetInstance()
@@ -47,32 +48,31 @@ namespace cheat::feature
 
     void PaimonFollow::OnGameUpdate()
     {
-        UPDATE_DELAY(100);
+        if (!f_Enabled)
+            return;
 
-        if (f_Enabled)
-        {
-            GameObject::Paimon = app::GameObject_Find(string_to_il2cppi("/EntityRoot/OtherGadgetRoot/NPC_Guide_Paimon(Clone)"), nullptr);
-            if (GameObject::Paimon == nullptr)
-                return;
-            
+        auto currentTime = util::GetCurrentTimeMillisec();
+        if (currentTime < nextUpdate)
+            return;
+
+        if (GameObject::Paimon == nullptr) {
+            GameObject::Paimon = app::GameObject_Find(string_to_il2cppi("/EntityRoot/OtherGadgetRoot/NPC_Guide_Paimon(Clone)"), nullptr);  
+        }
+
+        if (GameObject::ProfileLayer == nullptr) {
             GameObject::ProfileLayer = app::GameObject_Find(string_to_il2cppi("/Canvas/Pages/PlayerProfilePage"), nullptr);
-            if (GameObject::ProfileLayer == nullptr)
-                return;
+        }
+          
+        if (GameObject::Paimon != nullptr && GameObject::ProfileLayer != nullptr) {
+            auto ProfileOpen = app::GameObject_get_active(GameObject::ProfileLayer, nullptr);
 
-            if (GameObject::Paimon->fields._.m_CachedPtr != nullptr && GameObject::ProfileLayer->fields._.m_CachedPtr != nullptr)
-            {
-                auto ProfileOpen = app::GameObject_get_active(GameObject::ProfileLayer, nullptr);
-
-                if (ProfileOpen)
-                    app::GameObject_set_active(GameObject::Paimon, false, nullptr);
-                else
-                    app::GameObject_set_active(GameObject::Paimon, true, nullptr);
+            if (ProfileOpen) {
+                app::GameObject_set_active(GameObject::Paimon, false, nullptr);
+            }
+            else {
+                app::GameObject_set_active(GameObject::Paimon, true, nullptr);
             }
         }
-        else
-        {
-            GameObject::Paimon == nullptr;
-            GameObject::ProfileLayer == nullptr;
-        }
+        nextUpdate = currentTime + (int)f_DelayUpdate;
     }
 }

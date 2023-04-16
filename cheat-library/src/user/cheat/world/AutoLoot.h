@@ -28,7 +28,6 @@ namespace cheat::feature
 		config::Field<bool> f_PickupFilter_Animals;
 		config::Field<bool> f_PickupFilter_DropItems;
 		config::Field<bool> f_PickupFilter_Resources;
-		config::Field<bool> f_PickupFilter_Oculus;
 
 		static AutoLoot& GetInstance();
 

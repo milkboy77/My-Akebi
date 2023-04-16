@@ -6,6 +6,7 @@
 
 namespace cheat::feature 
 {
+
 	class RapidFire : public Feature
     {
 	public:
@@ -19,11 +20,6 @@ namespace cheat::feature
 		config::Field<config::Toggle<Hotkey>> f_MultiTarget;
 		config::Field<float> f_MultiTargetRadius;
 		config::Field<config::Toggle<Hotkey>> f_MultiAnimation;
-		config::Field<int> f_AnimationMultiplier;
-		config::Field<float> f_AnimationState;
-		config::Field<config::Toggle<Hotkey>> f_AttackSpeed;
-		config::Field<float> f_SpeedMultiplier;
-		uint32_t animationCounter;
 
 		static RapidFire& GetInstance();
 
@@ -39,5 +35,4 @@ namespace cheat::feature
 		int CalcCountToKill(float attackDamage, uint32_t targetID);
 	};
 }
-
 
